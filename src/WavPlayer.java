@@ -71,7 +71,8 @@ public class WavPlayer extends Thread {
 			try {
 //				String url="jdbc:sqlserver://MENAKA-LAPTOP\\SQLEXPRESS:1433;user=sa;password=testing;databaseName=malkey";
 				String url=PropertyUtil.getPropertyValue("database");//"jdbc:sqlserver://SERVER:1433;user=sa;password=Testing123;databaseName=malkey;";
-				String Sql=" select regno from fresvehicle where priority=1 and resno in ( select resno from freservation where cohirestsid='CONFIRMED' AND DOUT=CONVERT(VARCHAR(10),GETDATE(),120) and CONVERT(VARCHAR(2),GETDATE(),108) <= substring(freservation.TIMEOUT,1,2) and CONVERT(VARCHAR(2),GETDATE(),108)+2 >= substring(freservation.TIMEOUT,1,2))";
+				String Sql=" select regno from fresvehicle where priority=1 and resno in ( select resno from freservation where  DOUT=CONVERT(VARCHAR(10),GETDATE(),120) and CONVERT(VARCHAR(2),GETDATE(),108) <= substring(freservation.TIMEOUT,1,2) and CONVERT(VARCHAR(2),GETDATE(),108)+4 >= substring(freservation.TIMEOUT,1,2))";
+//				String Sql=" select regno from fresvehicle where priority=1 and resno in ( select resno from freservation where cohirestsid='CONFIRMED' AND DOUT=CONVERT(VARCHAR(10),GETDATE(),120) and CONVERT(VARCHAR(2),GETDATE(),108) <= substring(freservation.TIMEOUT,1,2) and CONVERT(VARCHAR(2),GETDATE(),108)+4 >= substring(freservation.TIMEOUT,1,2))";
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");	
 				conn = DriverManager.getConnection(url);
 				sta = conn.createStatement();
@@ -149,6 +150,7 @@ public class WavPlayer extends Thread {
 				txtURL=txtURL.append(pathSufix);
 				listPlayList.add(txtURL.toString());
 			}
+			System.out.println("");
 		   return listPlayList;
 	   }
 	}
